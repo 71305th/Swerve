@@ -113,6 +113,9 @@ public class SwerveModule extends SubsystemBase {
     //   getState().angle.getDegrees(),
     //   optimizedState.angle.getDegrees()
     // );
+
+
+    //normally its target - measurement but ok
     double error = getState().angle.getDegrees() - optimizedState.angle.getDegrees();
     double constrainedError = MathUtility.constrainAngleDegrees(error);
     double rotorOutput = mRotorPID.calculate(constrainedError);
