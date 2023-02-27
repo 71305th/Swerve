@@ -4,10 +4,10 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.SPI;
-import com.kauailabs.navx.frc.AHRS;
+import com.ctre.phoenix.sensors.WPI_Pigeon2;
 
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
@@ -18,148 +18,155 @@ import frc.robot.Constants.MotorConstants;
 
 public class Swerve extends SubsystemBase {
 
+  private final WPI_Pigeon2 mImu = new WPI_Pigeon2(1);
+
   private final SwerveModule mLeftFrontModule, mRightFrontModule, mLeftRearModule, mRightRearModule;
-  private AHRS mGyro = new AHRS(SPI.Port.kMXP);
   private SwerveDriveOdometry mOdometry;
 
   /** Creates a new Swerve. */
   public Swerve() {
     mLeftFrontModule = new SwerveModule(
-            MotorConstants.kLeftFrontThrottleID, 
-            MotorConstants.kLeftFrontThrottleEncoderID, 
-            MotorConstants.kLeftFrontRotorID, 
-            MotorConstants.kLeftFrontRotorEncoderID, 
-            MotorConstants.kLeftFrontRotorOffset
-        );
+      MotorConstants.kLeftFrontThrottleID, 
+      MotorConstants.kLeftFrontRotorID, 
+      MotorConstants.kLeftFrontRotorEncoderID, 
+      MotorConstants.kLeftFrontRotorOffset
+    );
 
-        mRightFrontModule = new SwerveModule(
-          MotorConstants.kRightFrontThrottleID, 
-          MotorConstants.kRightFrontThrottleEncoderID, 
-          MotorConstants.kRightFrontRotorID, 
-          MotorConstants.kRightFrontRotorEncoderID, 
-          MotorConstants.kRightFrontRotorOffset
-        );
+    mRightFrontModule = new SwerveModule(
+      MotorConstants.kRightFrontThrottleID, 
+      MotorConstants.kRightFrontRotorID, 
+      MotorConstants.kRightFrontRotorEncoderID, 
+      MotorConstants.kRightFrontRotorOffset
+    );
 
-        mLeftRearModule = new SwerveModule(
-          MotorConstants.kLeftRearThrottleID, 
-          MotorConstants.kLeftRearThrottleEncoderID, 
-          MotorConstants.kLeftRearRotorID, 
-          MotorConstants.kLeftRearRotorEncoderID, 
-          MotorConstants.kLeftRearRotorOffset
-        );
+    mLeftRearModule = new SwerveModule(
+      MotorConstants.kLeftRearThrottleID, 
+      MotorConstants.kLeftRearRotorID, 
+      MotorConstants.kLeftRearRotorEncoderID, 
+      MotorConstants.kLeftRearRotorOffset
+    );
 
-        mRightRearModule = new SwerveModule(
-          MotorConstants.kRightRearThrottleID, 
-          MotorConstants.kRightRearThrottleEncoderID, 
-          MotorConstants.kRightRearRotorID, 
-          MotorConstants.kRightRearRotorEncoderID, 
-          MotorConstants.kRightRearRotorOffset
-        );
+    mRightRearModule = new SwerveModule(
+      MotorConstants.kRightRearThrottleID, 
+      MotorConstants.kRightRearRotorID, 
+      MotorConstants.kRightRearRotorEncoderID, 
+      MotorConstants.kRightRearRotorOffset
+    );
 
-        mOdometry = new SwerveDriveOdometry(MotorConstants.kSwerveKinematics, mGyro.getRotation2d(), null);
+    mOdometry = new SwerveDriveOdometry(
+      MotorConstants.kSwerveKinematics,
+      mImu.getRotation2d(),
+      pos
+    );
   }
+
+  public static SwerveModulePosition[] pos = {
+    new SwerveModulePosition(0, new Rotation2d(0)),
+    new SwerveModulePosition(0, new Rotation2d(0)),
+    new SwerveModulePosition(0, new Rotation2d(0)),
+    new SwerveModulePosition(0, new Rotation2d(0)),
+  };
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
-
-    // Updates odometry with current module state
+  // This method will be called once per scheduler run
+  // Updates odometry with current module state
     mOdometry.update(
-        mGyro.getRotation2d(), 
-        new SwerveModulePosition[] {
-          getModulePositions()[0], 
-          getModulePositions()[1],
-          getModulePositions()[2],
-          getModulePositions()[3]
-        }
+      mImu.getRotation2d(), 
+      new SwerveModulePosition[] {
+        getModulePositions()[0], 
+        getModulePositions()[1],
+        getModulePositions()[2],
+        getModulePositions()[3]
+      }
     );
   }
 
   /**
-     * Get current swerve module states
-     * 輸出 4 個 Swerve Module 的當前狀態 modules
-     * 
-     * @return swerve module states
-     */
+   * Get current swerve module states
+   * 輸出 4 個 Swerve Module 的當前狀態 modules
+   * 
+   * @return swerve module states
+   */
   public SwerveModuleState[] getModuleStates() {
     return new SwerveModuleState[]{
-        mLeftFrontModule.getState(), 
-        mRightFrontModule.getState(), 
-        mLeftRearModule.getState(), 
-        mRightRearModule.getState()
+      mLeftFrontModule.getState(), 
+      mRightFrontModule.getState(), 
+      mLeftRearModule.getState(), 
+      mRightRearModule.getState()
     };
   }
 
   /**
-     * Get current swerve module positions
-     * 輸出 4 個 Swerve Module 的當前狀態 modules
-     * 
-     * @return swerve module positions
-     */
-    public SwerveModulePosition[] getModulePositions() {
-      return new SwerveModulePosition[]{
-          mLeftFrontModule.getPosition(), 
-          mRightFrontModule.getPosition(), 
-          mLeftRearModule.getPosition(), 
-          mRightRearModule.getPosition()
-      };
+   * Get current swerve module positions
+   * 輸出 4 個 Swerve Module 的當前狀態 modules
+   * 
+   * @return swerve module positions
+   */
+  public SwerveModulePosition[] getModulePositions() {
+    return new SwerveModulePosition[]{
+      mLeftFrontModule.getPosition(), 
+      mRightFrontModule.getPosition(), 
+      mLeftRearModule.getPosition(), 
+      mRightRearModule.getPosition()
+    };
     }
 
   /**
-     * Sets swerve module states
-     * 設置 4 個 Swerve module 的狀態。
-     * 
-     * @param desiredStates array of desired states, order: [leftFront, leftRear, rightFront, rightRear]
-     */
-    public void setModuleStates(SwerveModuleState[] desiredStates) {
-      SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, 1);
-      mLeftFrontModule.setState(desiredStates[0]);
-      mRightFrontModule.setState(desiredStates[1]);
-      mLeftRearModule.setState(desiredStates[2]);
-      mRightRearModule.setState(desiredStates[3]);
+   * Sets swerve module states
+   * 設置 4 個 Swerve module 的狀態。
+   * 
+   * @param desiredStates array of desired states, order: [leftFront, rightFront, rightRear, leftRear]
+   */
+  public void setModuleStates(SwerveModuleState[] desiredStates) {
+    SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, 1);
+    mLeftFrontModule.setState(desiredStates[0]);
+    mRightFrontModule.setState(desiredStates[1]);
+    mLeftRearModule.setState(desiredStates[2]);
+    mRightRearModule.setState(desiredStates[3]);
   }
 
   /**
-     * Drives the swerve - Input range: [-1, 1]
-     * 
-     * @param xSpeed percent power in the X direction (X 方向的功率百分比)
-     * @param ySpeed percent power in the Y direction (Y 方向的功率百分比)
-     * @param zSpeed percent power for rotation (旋轉的功率百分比)
-     * @param fieldOriented configure robot movement style (設置機器運動方式) (field or robot oriented)
-     */
-    public void drive(double xSpeed, double ySpeed, double zSpeed, boolean fieldOriented) {
-      SwerveModuleState[] states = null;
-      if(fieldOriented) {
-          states = MotorConstants.kSwerveKinematics.toSwerveModuleStates(
-              // IMU used for field oriented control
-              // IMU 用於 Field Oriented Control
-              ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, zSpeed, mGyro.getRotation2d())
-          );
-      } else {
-          states = MotorConstants.kSwerveKinematics.toSwerveModuleStates(
-              new ChassisSpeeds(xSpeed, ySpeed, zSpeed)
-          );
-      }
-      setModuleStates(states);
+   * Drives the swerve - Input range: [-1, 1]
+   * 
+   * @param xSpeed percent power in the X direction (X 方向的功率百分比)
+   * @param ySpeed percent power in the Y direction (Y 方向的功率百分比)
+   * @param zSpeed percent power for rotation (旋轉的功率百分比)
+   * @param fieldOriented configure robot movement style (設置機器運動方式) (field or robot oriented)
+   */
+  public void drive(double xSpeed, double ySpeed, double zSpeed, boolean fieldOriented) {
+    SwerveModuleState[] states = null;
+    if(fieldOriented) {
+        states = MotorConstants.kSwerveKinematics.toSwerveModuleStates(
+            // IMU used for field oriented control
+            // IMU 用於 Field Oriented Control
+            ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, zSpeed, mImu.getRotation2d())
+        );
+    } else {
+        states = MotorConstants.kSwerveKinematics.toSwerveModuleStates(
+            new ChassisSpeeds(xSpeed, ySpeed, zSpeed)
+        );
+    }
+    setModuleStates(states);
   }
 
   /**
-     * Get predicted pose
-     * 獲取機器人的當前位置
-     * 
-     * @return pose
-     */
-    public Pose2d getPose() {
-      return mOdometry.getPoseMeters();
+   * Get predicted pose
+   * 獲取機器人的當前位置
+   * 
+   * @return pose
+   */
+  public Pose2d getPose() {
+    return mOdometry.getPoseMeters();
   }
 
   /**
-     * Set robot pose
-     * 將測程法（odometry）位置設置為給與的 x、y、位置和角度
-     * 
-     * @param pose robot pose
-     */
-    public void setPose(Pose2d pose, SwerveModulePosition[] modulepos ) {
-      mOdometry.resetPosition(mGyro.getRotation2d(), modulepos, pose);
+   * Set robot pose
+   * 將測程法（odometry）位置設置為給與的 x、y、位置和角度
+   * 
+   * @param pose robot pose
+   */
+  public void setPose(Pose2d pose, SwerveModulePosition[] modulepos ) {
+    mOdometry.resetPosition(mImu.getRotation2d(), modulepos, pose);
   }
 }

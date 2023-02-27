@@ -42,71 +42,64 @@ public final class Constants {
   public static class MotorConstants {
 
     // Rotor IDs
-      public static final int kLeftFrontRotorID = 0;
-      public static final int kRightFrontRotorID = 0;
-      public static final int kLeftRearRotorID = 0;
-      public static final int kRightRearRotorID = 0;
+    public static final int kLeftFrontRotorID = 12;
+    public static final int kRightFrontRotorID = 22;
+    public static final int kLeftRearRotorID = 42;
+    public static final int kRightRearRotorID = 32;
 
     // Throttle IDs
-      public static final int kLeftFrontThrottleID = 0;
-      public static final int kRightFrontThrottleID = 0;
-      public static final int kLeftRearThrottleID = 0;
-      public static final int kRightRearThrottleID = 0;
+    public static final int kLeftFrontThrottleID = 11;
+    public static final int kRightFrontThrottleID = 21;
+    public static final int kLeftRearThrottleID = 41;
+    public static final int kRightRearThrottleID = 31;
     
     // Rotor Encoder IDs
-      public static final int kLeftFrontRotorEncoderID = 0;
-      public static final int kRightFrontRotorEncoderID = 0;
-      public static final int kLeftRearRotorEncoderID = 0;
-      public static final int kRightRearRotorEncoderID = 0;
-
-    // Throttle Encoder IDs
-      public static final int kLeftFrontThrottleEncoderID = 0;
-      public static final int kRightFrontThrottleEncoderID = 0;
-      public static final int kLeftRearThrottleEncoderID = 0;
-      public static final int kRightRearThrottleEncoderID = 0;
+    public static final int kLeftFrontRotorEncoderID = 1;
+    public static final int kRightFrontRotorEncoderID = 2;
+    public static final int kLeftRearRotorEncoderID = 4;
+    public static final int kRightRearRotorEncoderID = 3;
 
     // IMU ID
-      public static final int kImuID = 0;
+    public static final int kImuID = 0;
     
     // Rotor Offset
-    public static final double kLeftFrontRotorOffset = 0.0;
-    public static final double kRightFrontRotorOffset = 0.0;
-    public static final double kLeftRearRotorOffset = 0.0;
-    public static final double kRightRearRotorOffset = 0.0;
+    public static final double kLeftFrontRotorOffset = 134.121;
+    public static final double kRightFrontRotorOffset = -41.309;
+    public static final double kLeftRearRotorOffset = 85.078;
+    public static final double kRightRearRotorOffset = 48.076;
 
     // Rotor Inversion
-      public static final boolean kRotorEncoderDirection = false;
-      public static final boolean kRotorMotorInversion = false;
+    public static final boolean kRotorEncoderDirection = false;
+    public static final boolean kRotorMotorInversion = false;
 
     // Swerve Kinematics (order: left front, right front, left rear, right rear)
-      public static final SwerveDriveKinematics kSwerveKinematics = new SwerveDriveKinematics(
-        new Translation2d(0.0, 0.0), 
-        new Translation2d(0.0, 0.0), 
-        new Translation2d(0.0, 0.0),
-        new Translation2d(0.0, 0.0)
+    public static final SwerveDriveKinematics kSwerveKinematics = new SwerveDriveKinematics(
+      new Translation2d(0.288798, 0.288798), 
+      new Translation2d(0.288798, -0.288798), 
+      new Translation2d(-0.288798, 0.288798),
+      new Translation2d(-0.288798, -0.288798)
     );
   }
 
   public static class PIDConstants {
     // Rotor PID constants
-      public static final double kRotor_kP = 0.0;
+      public static final double kRotor_kP = 0.009;
       public static final double kRotor_kI = 0.0;
-      public static final double kRotor_kD = 0.0;
+      public static final double kRotor_kD = 0;
   }
 
   public static class DriveConstants {
     // Max Speed / Acceleration
-      public static final double kMaxVelocityMetersPerSecond = 0.0;
-      public static final double kMaxAccelerationMetersPerSecond = 0.0;
+      public static final double kMaxVelocityMetersPerSecond = 3;
+      public static final double kMaxAccelerationMetersPerSecond = 6;
     
     // Wheel Diameter
-      public static final double kWheelDiameterMeters = 0.0;
+      public static final double kWheelDiameterMeters = 0.1034;
 
     // Throttle Gear Ratio
-      public static final double kThrottleGearRatio = 0.0;
+      public static final double kThrottleGearRatio = 2.6470588;
 
     // Throttle Velocity Conversion Constant
     public static final double kSparkThrottleVelocityConversionFactor = 1 / kThrottleGearRatio / 60 * kWheelDiameterMeters * Math.PI; // Spark Max (NEO)
-    public static final double kFalconThrottleVelocityConversionFactor = 1 / kThrottleGearRatio / 2048 * kWheelDiameterMeters * Math.PI * 10; // Talon FX ( Falcon 500 )
   }  
 }

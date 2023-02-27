@@ -6,7 +6,6 @@ package frc.robot.commands;
 
 import frc.robot.Constants.JoystickConstants;
 import frc.robot.subsystems.Swerve;
-import frc.robot.subsystems.SwerveModule;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -36,9 +35,12 @@ public class ManualDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_Swerve.drive(m_DriverJoystick.getRawAxis( JoystickConstants.leftStick_Y ) * 0.7,
-                   m_DriverJoystick.getRawAxis( JoystickConstants.leftStick_X ) * 0.7,
-                   m_DriverJoystick.getRawAxis( JoystickConstants.rightStick_X ) * 0.7, true);
+    m_Swerve.drive(
+      m_DriverJoystick.getRawAxis(JoystickConstants.leftStick_Y ) * 0.3,
+      m_DriverJoystick.getRawAxis(JoystickConstants.leftStick_X ) * 0.3,
+      m_DriverJoystick.getRawAxis(JoystickConstants.rightStick_X ) * 0.3,
+      false
+    );
   }
 
   // Called once the command ends or is interrupted.
