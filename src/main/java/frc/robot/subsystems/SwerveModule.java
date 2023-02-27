@@ -8,16 +8,16 @@ import com.ctre.phoenix.sensors.AbsoluteSensorRange;
 import com.ctre.phoenix.sensors.SensorInitializationStrategy;
 import com.ctre.phoenix.sensors.WPI_CANCoder;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.ChenryLib.MathUtility;
+import frc.robot.ChenryLib.PID;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.MotorConstants;
 import frc.robot.Constants.PIDConstants;
@@ -68,6 +68,8 @@ public class SwerveModule extends SubsystemBase {
       30,0
     );
 
+    //RotorPID = new PID(PIDConstants.kRotor_kP, PIDConstants.kRotor_kI, PIDConstants.kRotor_kD, 30, 0);
+
     mThrottle.enableVoltageCompensation(Constants.kVoltageCompensation);
     mThrottle.setIdleMode(IdleMode.kBrake);
 
@@ -107,10 +109,14 @@ public class SwerveModule extends SubsystemBase {
     SwerveModuleState optimizedState = SwerveModuleState.optimize(state, getState().angle);
     
     // 通過比較目前角度與目標角度來用 PID 控制器計算轉向馬達所需的輸出
-    double rotorOutput = mRotorPID.calculate(
-      getState().angle.getDegrees(),
-      optimizedState.angle.getDegrees()
-    );
+    // double rotorOutput = mRotorPID.calculate(
+    //   getState().angle.getDegrees(),
+    //   optimizedState.angle.getDegrees()
+    // );
+    double error = getState().angle.getDegrees() - optimizedState.angle.getDegrees();
+    double constrainedError = MathUtility.constrainAngleDegrees(error);
+    double rotorOutput = mRotorPID.calculate(constrainedError);
+
 
     // System.out.println(state.angle.getDegrees());
     // System.out.println(optimizedState.angle.getDegrees());

@@ -43,7 +43,7 @@ public class TwoWheelOdometry {
         return y;
     }
     public double getHeadingDegrees(){
-        return mathUtil.radToDeg(headingRad);
+        return MathUtility.radToDeg(headingRad);
     }
     public double getHeadingRadians(){
         return headingRad;
@@ -53,6 +53,6 @@ public class TwoWheelOdometry {
     public void initialize(double initLeft, double initRight, double initAngle){
         lastLeft = initLeft;
         lastRight = initRight;
-        headingRad = mathUtil.degToRad(initAngle);
+        headingRad = MathUtility.degToRad(initAngle);
     }
 }
