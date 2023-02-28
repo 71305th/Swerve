@@ -27,7 +27,7 @@ public final class Constants {
 
   public static class JoystickConstants {
     public static final int kDriverControllerPort = 0;
-    public static final int kOperatorControllerPort = 0;
+    public static final int kOperatorControllerPort = 1;
 
     public static final int leftStick_X = 0;
     public static final int leftStick_Y = 1;
