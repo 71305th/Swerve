@@ -12,13 +12,13 @@ import frc.robot.subsystems.ApriltagSubsystem;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Swerve;
 
-public class shootNode2 extends CommandBase{
+public class shootNode1 extends CommandBase{
 
     private final Intake m_Intake;
     private final Swerve m_Swerve;
     private final ApriltagSubsystem m_apriltag;
 
-    public shootNode2(Intake intake, ApriltagSubsystem apriltag, Swerve swerve){
+    public shootNode1(Intake intake, ApriltagSubsystem apriltag, Swerve swerve){
         m_Intake = intake;
         m_apriltag = apriltag;
         m_Swerve = swerve;
@@ -30,8 +30,20 @@ public class shootNode2 extends CommandBase{
 
 
     Transform3d cameraToApriltag, intakeToNode;
+    /**
+     * 😱😱😱😱:D</p>
+     * x->robot's front</p>
+     * y->robot's left</p>
+     * z->robot's up
+     */
     Transform3d IntakeToCamera = new Transform3d();
-    Transform3d apriltagToNode2 = new Transform3d(new Translation3d(0.05535, 0, 0.40005), new Rotation3d());
+      /**
+     * 😱😱😱😱:D</p>
+     * x->robot's front</p>
+     * y->robot's left</p>
+     * z->robot's up
+     */
+    Transform3d apriltagToNode1 = new Transform3d(new Translation3d(0.48265, 0, 0.70545), new Rotation3d());
 
     double intakeTheta, distanceToNode, shootHeight, vertical_v, horizontal_v, shootOutput, chasisTurn, intakeMove;
     double adjustConstant1 = 0.1;
@@ -50,7 +62,7 @@ public class shootNode2 extends CommandBase{
     public void execute() {
         
         cameraToApriltag = m_apriltag.getCameratoTarget();
-        intakeToNode = IntakeToCamera.plus(cameraToApriltag).plus(apriltagToNode2);
+        intakeToNode = IntakeToCamera.plus(cameraToApriltag).plus(apriltagToNode1);
         distanceToNode = Math.sqrt(Math.pow(intakeToNode.getX(), 2) + Math.pow(intakeToNode.getY(), 2));
         shootHeight = intakeToNode.getZ();
         vertical_v = Math.sqrt(9.8*distanceToNode*distanceToNode/(2*intakeToNode.getZ())) + m_Swerve.getForwardVelocity();

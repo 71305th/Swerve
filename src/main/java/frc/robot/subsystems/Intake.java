@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -12,7 +13,7 @@ public class Intake extends SubsystemBase{
 
     private final Solenoid solenoid = new Solenoid(PneumaticsModuleType.CTREPCM, 0);
 
-    private final CANSparkMax intakeMotor = new CANSparkMax(61, MotorType.kBrushless);
+    private final WPI_TalonFX intakeMotor = new WPI_TalonFX(0);
 
     private final CANSparkMax intakeLeftShooter = new CANSparkMax(39, MotorType.kBrushless);
     private final CANSparkMax intakeRightShooter = new CANSparkMax(55, MotorType.kBrushless);
@@ -43,7 +44,7 @@ public class Intake extends SubsystemBase{
     }
 
     public void resetEncoders() {
-        intakeMotor.getEncoder().setPosition(0);
+        intakeMotor.setSelectedSensorPosition(0);
     }
 
     public void setIntakeShooter(double speed){
@@ -51,11 +52,11 @@ public class Intake extends SubsystemBase{
     }
 
     public double getIntakeEncoder(){
-        return intakeMotor.getEncoder().getPosition();
+        return intakeMotor.getSelectedSensorPosition();
     }
 
     public double getIntakeShooterVelocity(){
-        return intakeShooter.get();
+        return (intakeLeftShooter.getEncoder().getPosition() + intakeRightShooter.getEncoder().getPosition()) / 2;
     }
 }
 

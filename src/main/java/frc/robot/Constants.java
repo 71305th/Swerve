@@ -140,14 +140,14 @@ public final class Constants {
      * @param position
      */
     public static Map<Integer, Translation3d> ApriltagMap = new HashMap<>(){{
-        put(1, new Translation3d(15.69085, 1.07088214, 0));
-        put(2, new Translation3d(15.69085, 2.73911785, 0));
-        put(3, new Translation3d(15.69085, 4.40735356, 0));
-        put(4, new Translation3d(16.18615, 6.7262375, 0));
-        put(5, new Translation3d(0.3556, 6.7262375, 0));
-        put(6, new Translation3d(0.8509, 4.40735356, 0));
-        put(7, new Translation3d(0.8509, 2.73911785, 0));
-        put(8, new Translation3d(0.8509, 1.07088214, 0));
+        put(1, new Translation3d(15.69085, 1.07088214, 0.46355));
+        put(2, new Translation3d(15.69085, 2.73911785, 0.46355));
+        put(3, new Translation3d(15.69085, 4.40735356, 0.46355));
+        put(4, new Translation3d(16.18615, 6.7262375, 0.695325));
+        put(5, new Translation3d(0.3556, 6.7262375, 0.695325));
+        put(6, new Translation3d(0.8509, 4.40735356, 0.46355));
+        put(7, new Translation3d(0.8509, 2.73911785, 0.46355));
+        put(8, new Translation3d(0.8509, 1.07088214, 0.46355));
     }};
 
     /**
@@ -196,7 +196,7 @@ public final class Constants {
     public static Map<Integer, Translation3d> NodeMap = new HashMap<>(){{
       put(101, new Translation3d(15.3750, 0, 0));
       put(102, new Translation3d(15.7462, 0, 0.8636));
-      put(103, new Translation3d(16.1735, 0, 0.1169));
+      put(103, new Translation3d(16.1735, 0, 1.169));
       put(104, new Translation3d(15.3750, 0, 0));
       put(105, new Translation3d(15.7462, 0, 0.5969));
       put(106, new Translation3d(16.1735, 0, 0.9017));
