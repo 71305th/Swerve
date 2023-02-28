@@ -305,5 +305,13 @@ public final class Constants {
       put(13, new Translation3d(0.3683, 0, 0.1169));
     }};
   }
+
+  public static class pipelineConstants{
+    
+    //pipeline index
+    public static final int Limelight1_apriltag = 0;
+    public static final int Limelight1_limelightUpper = 1;
+    public static final int Limelight1_limelightLower = 2;
+  }
 }
 
