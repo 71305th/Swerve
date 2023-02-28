@@ -87,6 +87,14 @@ public class SwerveModule extends SubsystemBase {
     );
   }
 
+  public double getModuleForwardVelocity(){
+
+    double angle  = getState().angle.getRadians();
+    double v = getState().speedMetersPerSecond*0.1;//0.1 is a constant that adjust the motor output to actual wheel velocity😶
+
+    return v*Math.cos(angle);//not sure if it's cosine
+}
+
   /**
    * Returns the current position of the module.
    *

@@ -130,4 +130,8 @@ public class Swerve extends SubsystemBase {
   public void setPose(Pose2d pose, SwerveModulePosition[] modulepos ) {
     mOdometry.resetPosition(mImu.getRotation2d(), modulepos, pose);
   }
+
+  public double getForwardVelocity(){
+    return (mLeftFrontModule.getModuleForwardVelocity() + mRightFrontModule.getModuleForwardVelocity() + mLeftRearModule.getModuleForwardVelocity() + mRightRearModule.getModuleForwardVelocity())/4;
+}
 }
