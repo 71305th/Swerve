@@ -55,6 +55,7 @@ public class SwerveModule extends SubsystemBase {
     mRotor.setInverted(MotorConstants.kRotorMotorInversion);
     mRotor.enableVoltageCompensation(Constants.kVoltageCompensation);
     mRotor.setIdleMode(IdleMode.kBrake);
+    //mRotor.burnFlash();
 
     mRotorEncoder.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180);
     mRotorEncoder.configMagnetOffset(rotorOffsetAngleDeg);
