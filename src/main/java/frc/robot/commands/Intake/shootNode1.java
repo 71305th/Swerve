@@ -26,7 +26,7 @@ public class shootNode1 extends CommandBase{
         addRequirements(intake, apriltag, swerve);
     }
 
-    double currentTime, lastTime;
+    Timer m_clock = new Timer();
 
 
     Transform3d cameraToApriltag, intakeToNode;
@@ -81,25 +81,25 @@ public class shootNode1 extends CommandBase{
 
     @Override
     public boolean isFinished() {
+
         if(Math.abs(intakeMove) <= intakeTheta + adjustConstant3 && Math.abs(chasisTurn) <= adjustConstant4){
-            currentTime = Timer.getFPGATimestamp();
-            m_Intake.setIntakeShooter(shootOutput);
-            if(currentTime - lastTime == 1){
-                return true;
-            }else{
-                lastTime = currentTime;
-                return false;
-            }   
-        }else{
-            return false;
-        }
+            if(m_clock.advanceIfElapsed(0.5)){
+                m_Intake.setIntakeShooter(-0.2);
+            }
+            if(m_clock.advanceIfElapsed(1)){
+                m_Intake.setIntakeShooter(shootOutput);
+            }
+
+            return true;
+       }else{
+        return false;
+       }
     }
 
     @Override
     public void end(boolean interrupted) {
         m_Intake.setIntakeMotor(0);
         m_Intake.setIntakeShooter(0);
-        m_Intake.release();
     }
     
 
