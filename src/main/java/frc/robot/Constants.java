@@ -115,9 +115,9 @@ public final class Constants {
    */
   public static class ImageConstants{
 
-    public static final double kXDis = 0.1;
-    public static final double kYDis = 0.1;
-    public static final double kZDis = 0.1;
+    public static final double kXDis = 1;
+    public static final double kYDis = 1;
+    public static final double kZDis = 1;
     public static final double kApriltagHeight = 0.515;
     public static final double ConesHight_2 = 1.06600625;
     public static final double ConesHight_1 = 0.568325;
