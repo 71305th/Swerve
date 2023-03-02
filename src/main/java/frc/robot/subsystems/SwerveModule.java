@@ -38,24 +38,24 @@ public class SwerveModule extends SubsystemBase {
    * 
    * @param throttleID
    * @param throttleEncoderID
-   * @param rotorID
+   * @param rdotorID
    * @param rotorEncoderID
    * @param rotorOffsetAngelDeg
    */
-  public SwerveModule(int throttleID, int rotorID, int rotorEncoderID, double rotorOffsetAngleDeg ) {
+  public SwerveModule(int throttleID, int rotorID, int rotorEncoderID, double rotorOffsetAngleDeg, boolean throttleInverted) {
     mRotor = new CANSparkMax(rotorID, MotorType.kBrushless);
     mThrottle = new CANSparkMax(throttleID, MotorType.kBrushless);
     
     mRotorEncoder = new WPI_CANCoder(rotorEncoderID);
 
     mThrottle.restoreFactoryDefaults();
+    mThrottle.setInverted(throttleInverted);
     mRotor.restoreFactoryDefaults();
     mRotorEncoder.configFactoryDefault();
 
     mRotor.setInverted(MotorConstants.kRotorMotorInversion);
     mRotor.enableVoltageCompensation(Constants.kVoltageCompensation);
     mRotor.setIdleMode(IdleMode.kBrake);
-    //mRotor.burnFlash();
 
     mRotorEncoder.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180);
     mRotorEncoder.configMagnetOffset(rotorOffsetAngleDeg);

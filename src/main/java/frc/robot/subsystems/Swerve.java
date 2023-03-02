@@ -29,28 +29,32 @@ public class Swerve extends SubsystemBase {
       MotorConstants.kLeftFrontThrottleID, 
       MotorConstants.kLeftFrontRotorID, 
       MotorConstants.kLeftFrontRotorEncoderID, 
-      MotorConstants.kLeftFrontRotorOffset
+      MotorConstants.kLeftFrontRotorOffset,
+      false
     );
 
     mRightFrontModule = new SwerveModule(
       MotorConstants.kRightFrontThrottleID, 
       MotorConstants.kRightFrontRotorID, 
       MotorConstants.kRightFrontRotorEncoderID, 
-      MotorConstants.kRightFrontRotorOffset
+      MotorConstants.kRightFrontRotorOffset,
+      false
     );
 
     mLeftRearModule = new SwerveModule(
       MotorConstants.kLeftRearThrottleID, 
       MotorConstants.kLeftRearRotorID, 
       MotorConstants.kLeftRearRotorEncoderID, 
-      MotorConstants.kLeftRearRotorOffset
+      MotorConstants.kLeftRearRotorOffset,
+      true
     );
 
     mRightRearModule = new SwerveModule(
       MotorConstants.kRightRearThrottleID, 
       MotorConstants.kRightRearRotorID, 
       MotorConstants.kRightRearRotorEncoderID, 
-      MotorConstants.kRightRearRotorOffset
+      MotorConstants.kRightRearRotorOffset,
+      true
     );
 
     mOdometry = new SwerveDriveOdometry(

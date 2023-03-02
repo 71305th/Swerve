@@ -4,7 +4,16 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -19,6 +28,21 @@ public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
 
+  // Joystick js1 = new Joystick(0);
+
+  // double intakeOutput = 0;
+  // double intakeShooterOutput = 0;
+
+  // CANSparkMax left = new CANSparkMax(2, MotorType.kBrushless);
+  // CANSparkMax right = new CANSparkMax(3, MotorType.kBrushless);
+
+  // WPI_TalonFX intake = new WPI_TalonFX(14);
+
+  // MotorControllerGroup intakeShooter = new MotorControllerGroup(left, right);
+
+  // Compressor comp = new Compressor(0, PneumaticsModuleType.CTREPCM);
+  // Solenoid solenoid = new Solenoid(PneumaticsModuleType.CTREPCM, 0);
+
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -28,6 +52,8 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+    // left.setInverted(false);
+    // right.setInverted(true);
   }
 
   /**
@@ -81,7 +107,24 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    // if(js1.getRawButton(6)){
+    //   intake.set(0.2);
+    // }else if(js1.getRawButton(5)){
+    //   intake.set(-0.2);
+    // }else{
+    //   intake.set(0);
+    // }
+    // if(js1.getRawButtonPressed(1))solenoid.set(true);
+    // if(js1.getRawButtonPressed(2))solenoid.set(false);
+    // if(js1.getRawButton(3)){
+    //   intakeShooter.set(0.2);
+    // }else if(js1.getRawButton(4)){
+    //   intakeShooter.set(-1);
+    // }else{
+    //   intakeShooter.set(0);
+    // }
+  }
 
   @Override
   public void testInit() {
