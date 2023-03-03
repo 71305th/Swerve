@@ -193,7 +193,7 @@ public class ApriltagSubsystem extends SubsystemBase {
 
   /**
    * 
-   * @return a value [0,1] defining the accuracy of the apriltag return data
+   * @return a value [0,1] defining the accuracy of a apriltag return data
    */
   public double getAccuracy(){
     clock.start();
