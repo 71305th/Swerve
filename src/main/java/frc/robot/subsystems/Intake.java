@@ -13,12 +13,12 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Intake extends SubsystemBase{
 
     private final Solenoid solenoid = new Solenoid(PneumaticsModuleType.CTREPCM, 0);
-    private final Compressor compressor = new Compressor(null);
+    private final Compressor compressor = new Compressor(PneumaticsModuleType.CTREPCM);
 
-    private final WPI_TalonFX intakeMotor = new WPI_TalonFX(0);
+    private final WPI_TalonFX intakeMotor = new WPI_TalonFX(14);
 
-    private final CANSparkMax intakeLeftShooter = new CANSparkMax(39, MotorType.kBrushless);
-    private final CANSparkMax intakeRightShooter = new CANSparkMax(55, MotorType.kBrushless);
+    private final CANSparkMax intakeLeftShooter = new CANSparkMax(5, MotorType.kBrushless);
+    private final CANSparkMax intakeRightShooter = new CANSparkMax(6, MotorType.kBrushless);
 
     private final MotorControllerGroup intakeShooter = new MotorControllerGroup(intakeLeftShooter, intakeRightShooter);
 

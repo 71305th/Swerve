@@ -69,10 +69,10 @@ public final class Constants {
     public static final int kImuID = 0;
     
     // Rotor Offset
-    public static final double kLeftFrontRotorOffset = 134.121;
-    public static final double kRightFrontRotorOffset = -41.309;
-    public static final double kLeftRearRotorOffset = 85.078;
-    public static final double kRightRearRotorOffset = 48.076;
+    public static final double kLeftFrontRotorOffset = 44.209;
+    public static final double kRightFrontRotorOffset = 176.484;
+    public static final double kLeftRearRotorOffset = -47.9;
+    public static final double kRightRearRotorOffset = 137.549;
 
     // Rotor Inversion
     public static final boolean kRotorEncoderDirection = false;
@@ -89,9 +89,9 @@ public final class Constants {
 
   public static class PIDConstants {
     // Rotor PID constants
-      public static final double kRotor_kP = 0.009;
+      public static final double kRotor_kP = 0.011;
       public static final double kRotor_kI = 0.0;
-      public static final double kRotor_kD = 0;
+      public static final double kRotor_kD = 0.0025;
   }
 
   public static class DriveConstants {
