@@ -22,9 +22,6 @@ public class Intake extends SubsystemBase{
 
     private final MotorControllerGroup intakeShooter = new MotorControllerGroup(intakeLeftShooter, intakeRightShooter);
 
-    
-    
-
     public Intake() {
         intakeMotor.setInverted(false);
         intakeLeftShooter.setInverted(false);
