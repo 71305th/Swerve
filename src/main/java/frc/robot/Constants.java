@@ -27,7 +27,7 @@ public final class Constants {
 
   public static class JoystickConstants {
     public static final int kDriverControllerPort = 0;
-    public static final int kOperatorControllerPort = 0;
+    public static final int kOperatorControllerPort = 1;
 
     public static final int leftStick_X = 0;
     public static final int leftStick_Y = 1;
@@ -69,10 +69,10 @@ public final class Constants {
     public static final int kImuID = 0;
     
     // Rotor Offset
-    public static final double kLeftFrontRotorOffset = 134.121;
-    public static final double kRightFrontRotorOffset = -41.309;
-    public static final double kLeftRearRotorOffset = 85.078;
-    public static final double kRightRearRotorOffset = 48.076;
+    public static final double kLeftFrontRotorOffset = 44.209;
+    public static final double kRightFrontRotorOffset = 176.484;
+    public static final double kLeftRearRotorOffset = -47.9;
+    public static final double kRightRearRotorOffset = 137.549;
 
     // Rotor Inversion
     public static final boolean kRotorEncoderDirection = false;
@@ -89,9 +89,9 @@ public final class Constants {
 
   public static class PIDConstants {
     // Rotor PID constants
-      public static final double kRotor_kP = 0.009;
+      public static final double kRotor_kP = 0.011;
       public static final double kRotor_kI = 0.0;
-      public static final double kRotor_kD = 0;
+      public static final double kRotor_kD = 0.0025;
   }
 
   public static class DriveConstants {
@@ -115,9 +115,9 @@ public final class Constants {
    */
   public static class ImageConstants{
 
-    public static final double kXDis = 0.1;
-    public static final double kYDis = 0.1;
-    public static final double kZDis = 0.1;
+    public static final double kXDis = 1;
+    public static final double kYDis = 1;
+    public static final double kZDis = 1;
     public static final double kApriltagHeight = 0.515;
     public static final double ConesHight_2 = 1.06600625;
     public static final double ConesHight_1 = 0.568325;

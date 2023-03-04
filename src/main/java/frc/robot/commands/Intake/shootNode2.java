@@ -59,8 +59,9 @@ public class shootNode2 extends CommandBase{
         shootOutput = Math.sqrt(vertical_v*vertical_v + horizontal_v*horizontal_v)*adjustConstant1;
         chasisTurn = intakeToNode.getY();
         intakeMove = Units.rotationsToDegrees(m_Intake.getIntakeEncoder());
-        PID intakeMotorPID = new PID(0.001, 0, 0, intakeTheta, 1);
-        PID turnPID = new PID(0.001, 0, 0, 0, 1);
+        
+        PID intakeMotorPID = new PID(0.001, 0, 0, intakeTheta, 1);//😶😶😶😶
+        PID turnPID = new PID(0.001, 0, 0, 0, 1);//😶😶😶😶
 
         m_Intake.grab();
         m_Intake.setIntakeMotor(intakeMotorPID.calculate(intakeMove));

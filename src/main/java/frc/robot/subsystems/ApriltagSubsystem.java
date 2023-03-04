@@ -10,6 +10,7 @@ import org.photonvision.targeting.TargetCorner;
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.geometry.Translation3d;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.FieldConstants;
@@ -46,6 +47,9 @@ public class ApriltagSubsystem extends SubsystemBase {
   Translation3d mApriltagIDPosition;
   Transform3d targetToCamera;
   Transform3d targetToRonotCenter;
+
+  //variables of getAccuracy()
+  double ambiguitySum;
 
   
 
@@ -183,5 +187,23 @@ public class ApriltagSubsystem extends SubsystemBase {
 
   public boolean getDriverMode(){
     return PVCamera.getDriverMode();
+  }
+
+  Timer clock = new Timer();
+
+  /**
+   * 
+   * @return a value [0,1] defining the accuracy of a apriltag return data
+   */
+  public double getAccuracy(){
+    clock.start();
+    if (mPoseAmbiguity > 0.2){
+      ambiguitySum += Math.abs(0.2 - mPoseAmbiguity);
+    }
+    if (clock.advanceIfElapsed(1)){
+      clock.stop();
+      clock.reset();
+    }
+    return (4 - ambiguitySum)/4 ;
   }
 }
