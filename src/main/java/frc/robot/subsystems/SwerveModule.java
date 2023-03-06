@@ -73,7 +73,6 @@ public class SwerveModule extends SubsystemBase {
 
     mThrottle.enableVoltageCompensation(Constants.kVoltageCompensation);
     mThrottle.setIdleMode(IdleMode.kBrake);
-
   }
 
   /**
@@ -106,8 +105,12 @@ public class SwerveModule extends SubsystemBase {
    * @param state module state 
    */
   public void setState(SwerveModuleState state) {
-    SwerveModuleState optimizedState = SwerveModuleState.optimize(state, getState().angle);
+    if (Math.abs(state.speedMetersPerSecond) < 0.001) {
+      stopMotors(); 
+      return;
+    }
 
+    SwerveModuleState optimizedState = SwerveModuleState.optimize(state, getState().angle);
 
     //normally its target - measurement but ok
     double error = getState().angle.getDegrees() - optimizedState.angle.getDegrees();
@@ -122,6 +125,11 @@ public class SwerveModule extends SubsystemBase {
     mThrottle.set(optimizedState.speedMetersPerSecond);
     // System.out.println(optimizedState.speedMetersPerSecond);
     // System.out.println(rotorOutput);
+  }
+
+  public void stopMotors() {
+    mRotor.set(0);
+    mThrottle.set(0);
   }
 
   @Override

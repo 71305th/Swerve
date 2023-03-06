@@ -36,10 +36,10 @@ public class ManualDrive extends CommandBase {
   @Override
   public void execute() {
     m_Swerve.drive(
-      m_DriverJoystick.getRawAxis(JoystickConstants.leftStick_Y ) * 0.5,
-      m_DriverJoystick.getRawAxis(JoystickConstants.leftStick_X ) * 0.5,
-      m_DriverJoystick.getRawAxis(JoystickConstants.rightStick_X ) * 0.5,
-      false
+      m_DriverJoystick.getRawAxis(JoystickConstants.leftStick_Y) * 1,
+      m_DriverJoystick.getRawAxis(JoystickConstants.leftStick_X ) * 1,
+      m_DriverJoystick.getRawAxis(JoystickConstants.rightStick_X ) * 1,
+      m_DriverJoystick.getRawButtonPressed(JoystickConstants.btn_RB)
     );
   }
 

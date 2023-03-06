@@ -87,6 +87,23 @@ public final class Constants {
     );
   }
 
+  public static class ArmConstants {
+    public static final int kArmMotorPort = 0;
+    public static final int kLeftElbowMotorPort = 0;
+    public static final int kRightElbowMotorPort = 0;
+  }
+
+  public static class GrabberConstants {
+    public static final int kGrabberTurnplateMotorPort = 0;
+    public static final int kGrabberSolenoidChannel = 0;
+  }
+
+  public static class IntakeConstants {
+    public static final int kIntakeLeftMotorPort = 0;
+    public static final int kIntakeRightMotorPort = 0;
+    public static final int kIntakeSolenoidChannel = 0;
+  }
+
   public static class PIDConstants {
     // Rotor PID constants
       public static final double kRotor_kP = 0.011;
